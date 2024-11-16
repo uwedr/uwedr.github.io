@@ -60,7 +60,7 @@
       xhr.withCredentials = true;
       xhr.send();
       
-	  xhr.onload = function() {
+	  await xhr.onload = function() {
 		switch(status) {
 		  case 200:    // OK
 		    self._csrfToken = xhr.getResponseHeader('x-csrf-token');
