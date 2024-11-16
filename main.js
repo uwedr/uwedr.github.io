@@ -46,7 +46,6 @@
 	//}
 	
 	async fetchCSRFToken () {
-	// test GIT
 	  debugger;
 		
 		try {
@@ -58,13 +57,17 @@
 					'Access-Control-Allow-Origin'     : 'https://gesundheitskasse-q.eu20.analytics.cloud.sap/',
 					'Access-Control-Allow-Credentials': true,
 					'Access-Control-Expose-Headers'   : 'X-Csrf-Token,x-csrf-token',
-					'Content-Type'                    : 'application/json',
+					//'Content-Type'                    : 'application/json',
 					'X-Requested-With'                : 'XMLHttpRequest'
 				},
 				credentials: 'include'
 			});
 			if (!response.ok) {
 				throw new Error('Respnse status: ${response.status}');
+				
+			} else {
+				let y = response.headers.get("x-csrf-token")
+				console.log(y)
 			}
 		} catch (error) {
 			console.log(error);
