@@ -71,19 +71,25 @@
 		    // ????
 		//}
 		
-		
-		let x = fetch('https://f1dappl0.test.sozvers.at:44320/sap/opu/odata4/sap/zapi_bc_sac_bp_request_o4/srvd_a2x/sap/zbc_sac_bp_request/0001/BPRequest?sap-client=612', {
-			method: 'GET',
-			headers: {
-				'X-CSRF-Token'                    : 'Fetch',
-				'Access-Control-Allow-Methods'    : 'GET',
-				'Access-Control-Allow-Origin'     : 'https://gesundheitskasse-q.eu20.analytics.cloud.sap/',
-				'Access-Control-Allow-Credentials': true,
-				'Access-Control-Expose-Headers'   : 'X-Csrf-Token,x-csrf-token',
-				'Content-Type'                    : 'application/json',
-				'X-Requested-With'                : 'XMLHttpRequest'
+		try {
+			const response = fetch('https://f1dappl0.test.sozvers.at:44320/sap/opu/odata4/sap/zapi_bc_sac_bp_request_o4/srvd_a2x/sap/zbc_sac_bp_request/0001/BPRequest?sap-client=612', {
+				method: 'GET',
+				headers: {
+					'X-CSRF-Token'                    : 'Fetch',
+					'Access-Control-Allow-Methods'    : 'GET',
+					'Access-Control-Allow-Origin'     : 'https://gesundheitskasse-q.eu20.analytics.cloud.sap/',
+					'Access-Control-Allow-Credentials': true,
+					'Access-Control-Expose-Headers'   : 'X-Csrf-Token,x-csrf-token',
+					'Content-Type'                    : 'application/json',
+					'X-Requested-With'                : 'XMLHttpRequest'
+				}
+			});
+			if (!response.ok) {
+				throw new Error('Respnse status: ${response.status}');
 			}
-		});
+		} catch (error) {
+			console.log(error);
+		}
 		  //.then( function (response) {response.json())
 		  //.then((data) => console.log(data))
 		  //.catch((error) => console.log('Error occured: ' + error));
