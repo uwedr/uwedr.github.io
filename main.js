@@ -45,7 +45,7 @@
     //  return this._entitySet
 	//}
 	
-	fetchCSRFToken () {
+	async fetchCSRFToken () {
 	// test GIT
 	  debugger;
 	  //let xhr = new XMLHttpRequest()
