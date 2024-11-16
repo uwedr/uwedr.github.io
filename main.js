@@ -29,34 +29,42 @@ const DEFAULT_SAPCLIENT = '612';
     }
 	
 	setServer (server) {
-      this._server = server
+      this._server = server;
 	}
 	
 	getServer () {
-	  return this._server
+	  return this._server;
 	}
 	
 	setService (service) {
-      this._service = service
+      this._service = service;
 	}
 	
 	getService () {
-      return this._service
+      return this._service;
 	}
 	
 	setEntitySet (entitySet) {
-      this._entitySet = entitySet
+      this._entitySet = entitySet;
 	}
 	
-	setEntitySet (entitySet) {
-    	return this._entitySet
+	getEntitySet () {
+    	return this._entitySet;
+	}
+
+	setSAPClient (sapClient) {
+		this._sapClient = sapClient;
+	}
+	  
+	getSAPClient () {
+		return this._sapClient;
 	}
 	
 	async fetchCSRFToken () {
 	  debugger;
-		
+		const url = `${this._server}/${this._service}/?sap-client=${this._sapClient}`;
 		try {
-			const response = await fetch('https://f1dappl0.test.sozvers.at:44320/sap/opu/odata4/sap/zapi_bc_sac_bp_request_o4/srvd_a2x/sap/zbc_sac_bp_request/0001/?sap-client=612', {
+			const response = await fetch(url, {
 				method: 'GET',
 				headers: {
 					'X-CSRF-Token'                    : 'Fetch',
@@ -77,7 +85,6 @@ const DEFAULT_SAPCLIENT = '612';
 			console.log(error);
 			throw(error);        // Re-throw the error to be caught by the caller
 		}
-	  debugger;
 	  }
 	
 	
