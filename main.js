@@ -48,28 +48,28 @@
 	async fetchCSRFToken () {
 	// test GIT
 	  debugger;
-	  //let xhr = new XMLHttpRequest()
-      //xhr.open('GET', url, false);
-      //xhr.setRequestHeader('X-CSRF-Token', 'Fetch');
-      //xhr.setRequestHeader('Access-Control-Allow-Methods', 'GET');
-      //xhr.setRequestHeader('Access-Control-Allow-Origin', 'https://gesundheitskasse-q.eu20.analytics.cloud.sap/');
-      //xhr.setRequestHeader('Access-Control-Allow-Credentials', true);
-      //xhr.setRequestHeader('Access-Control-Expose-Headers','X-Csrf-Token,x-csrf-token');
-      //xhr.setRequestHeader('Content-Type', 'application/json');
-      //xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-      //xhr.withCredentials = true;
-      //xhr.send();
+	  let xhr = new XMLHttpRequest()
+      	xhr.open('GET', 'https://f1dappl0.test.sozvers.at:44320/sap/opu/odata4/sap/zapi_bc_sac_bp_request_o4/srvd_a2x/sap/zbc_sac_bp_request/0001/BPRequest?sap-client=612', false);
+      xhr.setRequestHeader('X-CSRF-Token', 'Fetch');
+      xhr.setRequestHeader('Access-Control-Allow-Methods', 'GET');
+      xhr.setRequestHeader('Access-Control-Allow-Origin', 'https://gesundheitskasse-q.eu20.analytics.cloud.sap/');
+      xhr.setRequestHeader('Access-Control-Allow-Credentials', true);
+      xhr.setRequestHeader('Access-Control-Expose-Headers','X-Csrf-Token,x-csrf-token');
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+      xhr.withCredentials = true;
+      xhr.send();
       
-	  //xhr.onload = function() {
-		//switch(status) {
-		  //case 200:    // OK
-		    //self._csrfToken = xhr.getResponseHeader('x-csrf-token');
-		    //break;
-		  //case 401:    // 401 Unauthorized
-		  //  break;
-	      //default:
-		    // ????
-		//}
+	  xhr.onload = function() {
+		switch(status) {
+		  case 200:    // OK
+		    self._csrfToken = xhr.getResponseHeader('x-csrf-token');
+		    break;
+		  case 401:    // 401 Unauthorized
+		   break;
+	      default:
+		    (( ????
+		};
 		
 		try {
 			const response = await fetch('https://f1dappl0.test.sozvers.at:44320/sap/opu/odata4/sap/zapi_bc_sac_bp_request_o4/srvd_a2x/sap/zbc_sac_bp_request/0001/BPRequest?sap-client=612', {
