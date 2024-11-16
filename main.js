@@ -83,10 +83,10 @@
 				'Content-Type'                    : 'application/json',
 				'X-Requested-With'                : 'XMLHttpRequest'
 			}
-		})
-		  .then( function (response) {response.json())
-		  .then((data) => console.log(data))
-		  .catch((error) => console.log('Error occured: ' + error));
+		});
+		  //.then( function (response) {response.json())
+		  //.then((data) => console.log(data))
+		  //.catch((error) => console.log('Error occured: ' + error));
 		  
 		  debugger;
 	  }
