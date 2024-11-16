@@ -60,7 +60,7 @@
       xhr.withCredentials = true;
       xhr.send();
       
-	  await xhr.onload = function() {
+	  xhr.onload = function() {
 		switch(status) {
 		  case 200:    // OK
 		    self._csrfToken = xhr.getResponseHeader('x-csrf-token');
@@ -84,7 +84,8 @@
 					'Access-Control-Expose-Headers'   : 'X-Csrf-Token,x-csrf-token',
 					'Content-Type'                    : 'application/json',
 					'X-Requested-With'                : 'XMLHttpRequest'
-				}
+				},
+				credentials: 'include'
 			});
 			if (!response.ok) {
 				throw new Error('Respnse status: ${response.status}');
