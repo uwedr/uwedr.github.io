@@ -69,7 +69,9 @@
 		   break;
 	      default:
 		    // ????
+		break;
 		};
+	  }
 		
 		try {
 			const response = await fetch('https://f1dappl0.test.sozvers.at:44320/sap/opu/odata4/sap/zapi_bc_sac_bp_request_o4/srvd_a2x/sap/zbc_sac_bp_request/0001/BPRequest?sap-client=612', {
