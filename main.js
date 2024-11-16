@@ -68,7 +68,7 @@
 		  case 401:    // 401 Unauthorized
 		   break;
 	      default:
-		    (( ????
+		    // ????
 		};
 		
 		try {
