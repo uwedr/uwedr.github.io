@@ -72,7 +72,7 @@
 		//}
 		
 		
-		fetch('https://f1dappl0.test.sozvers.at:44320/sap/opu/odata4/sap/zapi_bc_sac_bp_request_o4/srvd_a2x/sap/zbc_sac_bp_request/0001/BPRequest?sap-client=612', {
+		let x = fetch('https://f1dappl0.test.sozvers.at:44320/sap/opu/odata4/sap/zapi_bc_sac_bp_request_o4/srvd_a2x/sap/zbc_sac_bp_request/0001/BPRequest?sap-client=612', {
 			method: 'GET',
 			headers: {
 				'X-CSRF-Token'                    : 'Fetch',
@@ -84,7 +84,7 @@
 				'X-Requested-With'                : 'XMLHttpRequest'
 			}
 		})
-		  .then((response) => response.json())
+		  .then( function (response) {response.json())
 		  .then((data) => console.log(data))
 		  .catch((error) => console.log('Error occured: ' + error));
 		  
