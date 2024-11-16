@@ -1,3 +1,9 @@
+const DEFAULT_SERVER    = 'https://f1dappl0.test.sozvers.at:44320';
+const DEFAULT_SERVICE   = 'sap/opu/odata4/sap/zapi_bc_sac_bp_request_o4/srvd_a2x/sap/zbc_sac_bp_request/0001'; 
+const DEFAULT_ENTITYSET = '';
+const DEFAULT_SAPCLIENT = '612';
+
+
 (function () {
   const template = document.createElement('template')
   template.innerHTML = `
@@ -15,41 +21,42 @@
       this._shadowRoot = this.attachShadow({ mode: 'open' })
       this._shadowRoot.appendChild(template.content.cloneNode(true))
 	  
-	  //this._server = ''
-	  //this._service = ''
-	  //this._entitySet = ''
-	  //this._csrfToken = ''
+	  this._server    = DEFAULT_SERVER;
+	  this._service   = DEFAULT_SERVICE;
+	  this._entitySet = DEFAULT_ENTITYSET;
+	  this._sapClient = DEFAULT_SAPCLIENT;
+	  this._csrfToken = ''
     }
 	
-	//setServer (server) {
-    //  this._server = server
-	//}
+	setServer (server) {
+      this._server = server
+	}
 	
-	//getServer () {
-	//  return this._server
-	//}
+	getServer () {
+	  return this._server
+	}
 	
-	//setService (service) {
-    //  this._service = service
-	//}
+	setService (service) {
+      this._service = service
+	}
 	
-	//getService () {
-    //  return this._service
-	//}
+	getService () {
+      return this._service
+	}
 	
-	//setEntitySet (entitySet) {
-    //  this._entitySet = entitySet
-	//}
+	setEntitySet (entitySet) {
+      this._entitySet = entitySet
+	}
 	
-	//setEntitySet (entitySet) {
-    //  return this._entitySet
-	//}
+	setEntitySet (entitySet) {
+    	return this._entitySet
+	}
 	
 	async fetchCSRFToken () {
 	  debugger;
 		
 		try {
-			const response = await fetch('https://f1dappl0.test.sozvers.at:44320/sap/opu/odata4/sap/zapi_bc_sac_bp_request_o4/srvd_a2x/sap/zbc_sac_bp_request/0001/BPRequest?sap-client=612', {
+			const response = await fetch('https://f1dappl0.test.sozvers.at:44320/sap/opu/odata4/sap/zapi_bc_sac_bp_request_o4/srvd_a2x/sap/zbc_sac_bp_request/0001/?sap-client=612', {
 				method: 'GET',
 				headers: {
 					'X-CSRF-Token'                    : 'Fetch',
@@ -57,26 +64,20 @@
 					'Access-Control-Allow-Origin'     : 'https://gesundheitskasse-q.eu20.analytics.cloud.sap/',
 					'Access-Control-Allow-Credentials': true,
 					'Access-Control-Expose-Headers'   : 'X-Csrf-Token,x-csrf-token',
-					//'Content-Type'                    : 'application/json',
 					'X-Requested-With'                : 'XMLHttpRequest'
 				},
 				credentials: 'include'
 			});
-			if (!response.ok) {
-				throw new Error('Respnse status: ${response.status}');
-				
+			if (response.ok) {
+				this._csrfToken = response.headers.get("x-csrf-token");
 			} else {
-				let y = response.headers.get("x-csrf-token")
-				console.log(y)
+				throw new Error('Respnse status: ${response.status}');
 			}
 		} catch (error) {
 			console.log(error);
+			throw(error);        // Re-throw the error to be caught by the caller
 		}
-		  //.then( function (response) {response.json())
-		  //.then((data) => console.log(data))
-		  //.catch((error) => console.log('Error occured: ' + error));
-		  
-		  debugger;
+	  debugger;
 	  }
 	
 	
