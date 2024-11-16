@@ -88,32 +88,39 @@ const DEFAULT_SAPCLIENT = '612';
 	  }
 	
 	
-	//createProjectWithWBS (request, items) {
-	//	debugger;
+	async createProjectWithWBS (request, items) {
+		debugger;
 		
-		// prepare data
-	//	for (var i=0; i<items.length; i++) {
-	//		var item = items[i];
+		// prepare data -> convert strings into numerical values
+		for (var i=0; i<items.length; i++) {
+			var item = items[i];
 			
-	//		if (item.hasOwnProperty('zzgkosten')) {
-	//			item.zzgkosten = Number(item.zzgkosten);				
-	//		};
-	//		if (item.hasOwnProperty('zzkostservice')) {
-	//			item.zzkostservice = Number(item.zzkostservice);
-	//		};
-	//		if (item.hasOwnProperty('zzkmiete')) {
-	//			item.zzkmiete = Number(item.zzkmiete);
-	//		};
-	//		if (item.hasOwnProperty('zzkverbrauch')) {
-	//			item.zzkverbrauch  = Number(item.zzkverbrauch);
-	//		};
-	//	};
-	//	request._bp_item = items;
+			if (item.hasOwnProperty('zzgkosten')) {
+				item.zzgkosten = Number(item.zzgkosten);				
+			};
+			if (item.hasOwnProperty('zzkostservice')) {
+				item.zzkostservice = Number(item.zzkostservice);
+			};
+			if (item.hasOwnProperty('zzkmiete')) {
+				item.zzkmiete = Number(item.zzkmiete);
+			};
+			if (item.hasOwnProperty('zzkverbrauch')) {
+				item.zzkverbrauch  = Number(item.zzkverbrauch);
+			};
+		};
+		request._bp_item = items;
 
 		// check CSRF-Token
-	//	if (this._csrfToken === '') {
-	//	  this._fetchCSRFToken()
-	//	}
+		if (this._csrfToken === '') {
+			try {
+				this._fetchCSRFToken();
+			} catch(error) {
+				console.log('Fehler in Methode createProjectWithWBS.');
+				console.log('CSRF-Token konnte nicht ermittelt werden.');
+				throw(error); // Re-throw the error to be caught by the caller
+			}
+			
+		}
 		
 		// send POST request
 	//	let xhr = new XMLHttpRequest();
@@ -138,7 +145,7 @@ const DEFAULT_SAPCLIENT = '612';
 	 //     default:
 		    // ????
 	//	}
-	//  }
+	 }
 		
 		
 	//	if (xhr.readyState == 4) {
@@ -156,13 +163,6 @@ const DEFAULT_SAPCLIENT = '612';
 		
 
     //}
-
-
-
-
-    render () {
-     
-    }
 	
   }
 
