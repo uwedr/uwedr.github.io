@@ -19,6 +19,7 @@ const DEFAULT_SAPCLIENT = '612';
     constructor () {
       super();
 	  //self = this;	
+	  this._abc = this.attachInternals();
 
       this._shadowRoot = this.attachShadow({ mode: 'open' });
       this._shadowRoot.appendChild(template.content.cloneNode(true));
