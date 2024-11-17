@@ -89,7 +89,7 @@ const DEFAULT_SAPCLIENT = '612';
 	  }
 	
 	
-	async createProjectWithWBS (request, items) {
+	createProjectWithWBS (request, items) {
 		debugger;
 		
 		// prepare data -> convert strings into numerical values
@@ -114,7 +114,7 @@ const DEFAULT_SAPCLIENT = '612';
 		// check CSRF-Token
 		if (this._csrfToken === '') {
 			try {
-				await this.fetchCSRFToken();
+				this.fetchCSRFToken();
 			} catch(error) {
 				console.log('Fehler in Methode createProjectWithWBS.');
 				console.log('CSRF-Token konnte nicht ermittelt werden.');
@@ -130,7 +130,7 @@ const DEFAULT_SAPCLIENT = '612';
 		const test = new Object();
 		try {
 			const url = `${this._server}/${this._service}/${this._entitySet}?sap-client=${this._sapClient}`;
-			const response = await fetch(url, {
+			const response = fetch(url, {
 				method: 'POST',
 				headers: {
 					'Content-type'                     : 'application/json',
@@ -144,7 +144,7 @@ const DEFAULT_SAPCLIENT = '612';
 				credentials: 'include',
 				body: JSON.stringify(request)
 			});
-			let res = await response.json();
+			let res = esponse.json();
 			result.status = response.status;
 			result.url = response.url;
 
