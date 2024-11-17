@@ -18,7 +18,7 @@ const DEFAULT_SAPCLIENT = '612';
   class Main extends HTMLElement {
     constructor () {
       super();
-	  self = this;	
+	  //self = this;	
 
       this._shadowRoot = this.attachShadow({ mode: 'open' });
       this._shadowRoot.appendChild(template.content.cloneNode(true));
