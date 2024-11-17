@@ -166,5 +166,5 @@ const DEFAULT_SAPCLIENT = '612';
 	
   }
 
-  customElements.define('com-sap-sac-fetch', Main)
+  customElements.define('com-sap-sac-p2r-interface', Main)
 })()
