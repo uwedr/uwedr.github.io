@@ -61,11 +61,11 @@ const DEFAULT_SAPCLIENT = '612';
 		return this._sapClient;
 	}
 	
-	fetchCSRFToken () {
+	async fetchCSRFToken () {
 	  //debugger;
 		const url = `${this._server}/${this._service}/?sap-client=${this._sapClient}`;
 		try {
-			const response = fetch(url, {
+			const response = await fetch(url, {
 				method: 'GET',
 				headers: {
 					'X-CSRF-Token'                    : 'Fetch',
@@ -89,7 +89,7 @@ const DEFAULT_SAPCLIENT = '612';
 	  }
 	
 	
-	createProjectWithWBS (request, items) {
+	async createProjectWithWBS (request, items) {
 		debugger;
 		
 		// prepare data -> convert strings into numerical values
@@ -114,13 +114,12 @@ const DEFAULT_SAPCLIENT = '612';
 		// check CSRF-Token
 		if (this._csrfToken === '') {
 			try {
-				this.fetchCSRFToken();
+				await this.fetchCSRFToken();
 			} catch(error) {
 				console.log('Fehler in Methode createProjectWithWBS.');
 				console.log('CSRF-Token konnte nicht ermittelt werden.');
 				throw(error); // Re-throw the error to be caught by the caller   // TODO: SAC kann den Fehler ja nicht abfangen -> irgendetwas anders machen
 			}
-			
 		}
 
 		// send POST request
@@ -130,7 +129,7 @@ const DEFAULT_SAPCLIENT = '612';
 		const test = new Object();
 		try {
 			const url = `${this._server}/${this._service}/${this._entitySet}?sap-client=${this._sapClient}`;
-			const response = fetch(url, {
+			const response = await fetch(url, {
 				method: 'POST',
 				headers: {
 					'Content-type'                     : 'application/json',
@@ -144,7 +143,7 @@ const DEFAULT_SAPCLIENT = '612';
 				credentials: 'include',
 				body: JSON.stringify(request)
 			});
-			let res = response.json();
+			let res = await response.json();
 			result.status = response.status;
 			result.url = response.url;
 
@@ -158,7 +157,7 @@ const DEFAULT_SAPCLIENT = '612';
 				result.messages = res.error.details.map(message => message);
 				//throw new Error('Respnse status: ${response.status}');
 				test.result = 'Error';
-				test.messages = res.error.details.map(message => message.message);
+				test.messages = await res.error.details.map(message => message.message);
 				return test;
 			}
 		} catch (error) {
