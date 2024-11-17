@@ -126,7 +126,8 @@ const DEFAULT_SAPCLIENT = '612';
 		// send POST request
 		debugger;
 		const result = new Object();
-		const test = new P2RInterfaceResult();
+		//const test = new P2RInterfaceResult();
+		const test = new Object();
 		try {
 			const url = `${this._server}/${this._service}/${this._entitySet}?sap-client=${this._sapClient}`;
 			const response = await fetch(url, {
