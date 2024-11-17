@@ -158,14 +158,15 @@ const DEFAULT_SAPCLIENT = '612';
 				//throw new Error('Respnse status: ${response.status}');
 				test.result = 'Error';
 				test.messages = await res.error.details.map(message => message.message);
-				return test;
+				
 			}
 		} catch (error) {
 			debugger;
 			console.log(error);
 			result.status = 'Exception';
 		}
-		return result;
+		//return result;
+		return test;
     }
   }
 
