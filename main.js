@@ -144,6 +144,7 @@ const DEFAULT_SAPCLIENT = '612';
 			if (response.ok) {
 				let res = response.json();
 			} else {
+				let res = response.json();
 				throw new Error('Respnse status: ${response.status}');
 			}
 		} catch (error) {
