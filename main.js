@@ -141,17 +141,17 @@ const DEFAULT_SAPCLIENT = '612';
 				credentials: 'include',
 				body: JSON.stringify(request)
 			});
+			let res = await response.json();
+			result.status = response.status;
+			result.url = response.url;
+
 			if (response.ok) {
 				debugger;
-				let res = await response.json();
 				result.status = 'Ok';
 			} else {
 				debugger;
-				let res = await response.json();
 				result.result = 'Error'
-				result.status = response.status;
-				result.url = response.url;
-				result.error = error;
+				result.error = res.error;
 				result.messages = res.error.details.map(message => message);
 				//throw new Error('Respnse status: ${response.status}');
 			}
