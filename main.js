@@ -142,9 +142,9 @@ const DEFAULT_SAPCLIENT = '612';
 				body: JSON.stringify(request)
 			});
 			if (response.ok) {
-				let res = response.json();
+				let res = await response.json();
 			} else {
-				let res = response.json();
+				let res = await response.json();
 				throw new Error('Respnse status: ${response.status}');
 			}
 		} catch (error) {
