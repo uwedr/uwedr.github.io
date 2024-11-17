@@ -115,7 +115,7 @@ const DEFAULT_SAPCLIENT = '612';
 		// check CSRF-Token
 		if (this._csrfToken === '') {
 			try {
-				this._fetchCSRFToken();
+				this.HTMLElement._fetchCSRFToken();
 			} catch(error) {
 				console.log('Fehler in Methode createProjectWithWBS.');
 				console.log('CSRF-Token konnte nicht ermittelt werden.');
