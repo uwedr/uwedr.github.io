@@ -1,6 +1,6 @@
 const DEFAULT_SERVER    = 'https://f1dappl0.test.sozvers.at:44320';
 const DEFAULT_SERVICE   = 'sap/opu/odata4/sap/zapi_bc_sac_bp_request_o4/srvd_a2x/sap/zbc_sac_bp_request/0001'; 
-const DEFAULT_ENTITYSET = '';
+const DEFAULT_ENTITYSET = 'BPRequest';
 const DEFAULT_SAPCLIENT = '612';
 
 
@@ -126,6 +126,7 @@ const DEFAULT_SAPCLIENT = '612';
 		// send POST request
 		debugger;
 		try {
+			const url = `${this._server}/${this._service}/${this._entitySet}/?sap-client=${this._sapClient}`;
 			const response = await fetch(url, {
 				method: 'POST',
 				headers: {
