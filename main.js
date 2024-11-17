@@ -61,11 +61,11 @@ const DEFAULT_SAPCLIENT = '612';
 		return this._sapClient;
 	}
 	
-	async fetchCSRFToken () {
+	fetchCSRFToken () {
 	  //debugger;
 		const url = `${this._server}/${this._service}/?sap-client=${this._sapClient}`;
 		try {
-			const response = await fetch(url, {
+			const response = fetch(url, {
 				method: 'GET',
 				headers: {
 					'X-CSRF-Token'                    : 'Fetch',
