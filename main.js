@@ -148,7 +148,11 @@ const DEFAULT_SAPCLIENT = '612';
 			} else {
 				debugger;
 				let res = await response.json();
-				result.status = 'Error';
+				result.result = 'Error'
+				result.status = response.status;
+				result.url = response.url;
+				result.error = error;
+				result.messages = res.error.details.map(message => message);
 				//throw new Error('Respnse status: ${response.status}');
 			}
 		} catch (error) {
