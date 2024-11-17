@@ -170,5 +170,5 @@ const DEFAULT_SAPCLIENT = '612';
   }
 
   customElements.define('com-sap-sac-p2r-interface', Main)
-  var instance = document.createElement( 'com-sap-sac-p2r-interface');
+  this.instance = document.createElement( 'com-sap-sac-p2r-interface');
 })()
