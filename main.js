@@ -124,7 +124,9 @@ const DEFAULT_SAPCLIENT = '612';
 		}
 
 		// send POST request
+		debugger;
 		const result = new Object();
+		const test = new P2RInterfaceResult();
 		try {
 			const url = `${this._server}/${this._service}/${this._entitySet}?sap-client=${this._sapClient}`;
 			const response = await fetch(url, {
@@ -154,6 +156,9 @@ const DEFAULT_SAPCLIENT = '612';
 				result.error = res.error;
 				result.messages = res.error.details.map(message => message);
 				//throw new Error('Respnse status: ${response.status}');
+				test.result = 'Error';
+				test.messages = res.error.details.map(message => message);
+				return test;
 			}
 		} catch (error) {
 			debugger;
