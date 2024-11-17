@@ -17,9 +17,11 @@ const DEFAULT_SAPCLIENT = '612';
 
   class Main extends HTMLElement {
     constructor () {
-      super()
-      this._shadowRoot = this.attachShadow({ mode: 'open' })
-      this._shadowRoot.appendChild(template.content.cloneNode(true))
+      super();
+	  self = this;	
+
+      this._shadowRoot = this.attachShadow({ mode: 'open' });
+      this._shadowRoot.appendChild(template.content.cloneNode(true));
 	  
 	  this._server    = DEFAULT_SERVER;
 	  this._service   = DEFAULT_SERVICE;
@@ -113,7 +115,7 @@ const DEFAULT_SAPCLIENT = '612';
 		// check CSRF-Token
 		if (this._csrfToken === '') {
 			try {
-				_fetchCSRFToken();
+				this._fetchCSRFToken();
 			} catch(error) {
 				console.log('Fehler in Methode createProjectWithWBS.');
 				console.log('CSRF-Token konnte nicht ermittelt werden.');
