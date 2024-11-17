@@ -124,7 +124,7 @@ const DEFAULT_SAPCLIENT = '612';
 		}
 
 		// send POST request
-		debugger;
+		const result = new Object();
 		try {
 			const url = `${this._server}/${this._service}/${this._entitySet}?sap-client=${this._sapClient}`;
 			const response = await fetch(url, {
@@ -142,58 +142,22 @@ const DEFAULT_SAPCLIENT = '612';
 				body: JSON.stringify(request)
 			});
 			if (response.ok) {
+				debugger;
 				let res = await response.json();
+				result.status = 'Ok';
 			} else {
+				debugger;
 				let res = await response.json();
-				throw new Error('Respnse status: ${response.status}');
+				result.status = 'Error';
+				//throw new Error('Respnse status: ${response.status}');
 			}
 		} catch (error) {
+			debugger;
 			console.log(error);
-			throw(error);        // Re-throw the error to be caught by the caller
+			result.status = 'Exception';
 		}
-		
-		
-	//	let xhr = new XMLHttpRequest();
-	//	xhr.open('POST', url, false);
-	//	xhr.setRequestHeader('Content-type', 'application/json');
-	//	xhr.setRequestHeader('Access-Control-Allow-Credentials', true);
-	//	xhr.setRequestHeader('Cache-Control', 'no-cache');
-	//	xhr.setRequestHeader("X-Referrer-Hash", window.location.hash);
-	//	xhr.setRequestHeader('Access-Control-Allow-Origin', 'https://gesundheitskasse-q.eu20.analytics.cloud.sap/');
-	//	xhr.setRequestHeader('Access-Control-Allow-Methods', 'POST');
-	//	xhr.setRequestHeader('X-CSRF-Token', this._csrfToken);
-	//	xhr.withCredentials = true;
-	//	xhr.send(JSON.stringify(data));
-		
-	//	xhr.onload = function() {
-	//	switch(status) {
-	//	  case 201:    // Created
-	//	    self._csrfToken = xhr.getResponseHeader('x-csrf-token');
-	//	    break;
-	//	  case 401:    // 401 Unauthorized
-	//	    break;
-	 //     default:
-		    // ????
-	//	}
-	 }
-		
-		
-	//	if (xhr.readyState == 4) {
-	//		  if (xhr.status == 201) {
-	//			 //Get Status
-	//			this.Response = JSON.parse(xhr.responseText);
-	//			//Get Status
-	//			this.Status = xhr.status
-	//		  } else {
-	//			//Get Status
-	//			this.Status = xhr.status
-	//		  };
-	//		};
-	//	};
-		
-
-    //}
-	
+		return result;
+    }
   }
 
   customElements.define('com-sap-sac-p2r-interface', Main);
