@@ -136,13 +136,13 @@ const DEFAULT_SAPCLIENT = '612';
 					'Access-Control-Allow-Methods'     : 'POST',
 					'Access-Control-Allow-Origin'      : 'https://gesundheitskasse-q.eu20.analytics.cloud.sap/',
 					"X-Referrer-Hash"                  : window.location.hash,
-					'X-CSRF-Token'                     : this._csrfToken,
+					'X-CSRF-Token'                     : this._csrfToken
 				},
 				credentials: 'include',
 				body: JSON.stringify(request)
 			});
 			if (response.ok) {
-				let res = reponse.json();
+				let res = response.json();
 			} else {
 				throw new Error('Respnse status: ${response.status}');
 			}
