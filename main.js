@@ -158,7 +158,7 @@ const DEFAULT_SAPCLIENT = '612';
 				result.messages = res.error.details.map(message => message);
 				//throw new Error('Respnse status: ${response.status}');
 				test.result = 'Error';
-				test.messages = res.error.details.map(message => message);
+				test.messages = res.error.details.map(message => message.message);
 				return test;
 			}
 		} catch (error) {
