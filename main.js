@@ -126,7 +126,7 @@ const DEFAULT_SAPCLIENT = '612';
 		// send POST request
 		debugger;
 		try {
-			const url = `${this._server}/${this._service}/${this._entitySet}/?sap-client=${this._sapClient}`;
+			const url = `${this._server}/${this._service}/${this._entitySet}?sap-client=${this._sapClient}`;
 			const response = await fetch(url, {
 				method: 'POST',
 				headers: {
