@@ -17,11 +17,11 @@ const DEFAULT_SAPCLIENT = '612';
 
   class Main extends HTMLElement {
     constructor (elementId) {
-	  debugger;
+	  //debugger;
       super();
 	  //self = this;	
 	  //this._abc = this.attachInternals();
-	  this._element = document.getElementById(elementId);
+	  //this._element = document.getElementById(elementId);
 
       this._shadowRoot = this.attachShadow({ mode: 'open' });
       this._shadowRoot.appendChild(template.content.cloneNode(true));
@@ -120,7 +120,7 @@ const DEFAULT_SAPCLIENT = '612';
 			try {
 				//this.HTMLElement._fetchCSRFToken();
 				//this.$.com-sap-sac-p2r-interface.fetchCSRFToken();
-				this._element.fetchCSRFToken();
+				this.fetchCSRFToken();
 			} catch(error) {
 				console.log('Fehler in Methode createProjectWithWBS.');
 				console.log('CSRF-Token konnte nicht ermittelt werden.');
@@ -173,6 +173,6 @@ const DEFAULT_SAPCLIENT = '612';
 	
   }
 
-  customElements.define('com-sap-sac-p2r-interface', Main('com-sap-sac-p2r-interface'));
+  customElements.define('com-sap-sac-p2r-interface', Main);
   //this.instance = document.createElement( 'com-sap-sac-p2r-interface');
 })()
