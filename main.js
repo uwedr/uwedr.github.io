@@ -17,11 +17,7 @@ const DEFAULT_SAPCLIENT = '612';
 
   class Main extends HTMLElement {
     constructor (elementId) {
-	  //debugger;
       super();
-	  //self = this;	
-	  //this._abc = this.attachInternals();
-	  //this._element = document.getElementById(elementId);
 
       this._shadowRoot = this.attachShadow({ mode: 'open' });
       this._shadowRoot.appendChild(template.content.cloneNode(true));
@@ -118,18 +114,42 @@ const DEFAULT_SAPCLIENT = '612';
 		// check CSRF-Token
 		if (this._csrfToken === '') {
 			try {
-				//this.HTMLElement._fetchCSRFToken();
-				//this.$.com-sap-sac-p2r-interface.fetchCSRFToken();
 				this.fetchCSRFToken();
 			} catch(error) {
 				console.log('Fehler in Methode createProjectWithWBS.');
 				console.log('CSRF-Token konnte nicht ermittelt werden.');
-				throw(error); // Re-throw the error to be caught by the caller
+				throw(error); // Re-throw the error to be caught by the caller   // TODO: SAC kann den Fehler ja nicht abfangen -> irgendetwas anders machen
 			}
 			
 		}
-		
+
 		// send POST request
+		try {
+			const response = await fetch(url, {
+				method: 'POST',
+				headers: {
+					'Content-type'                     : 'application/json',
+					'Cache-Control'                    : 'no-cache',
+					'Access-Control-Allow-Credentials' : true,
+					'Access-Control-Allow-Methods'     : 'POST',
+					'Access-Control-Allow-Origin'      : 'https://gesundheitskasse-q.eu20.analytics.cloud.sap/',
+					"X-Referrer-Hash"                  : window.location.hash,
+					'X-CSRF-Token'                     : this._csrfToken,
+				},
+				credentials: 'include',
+				body: JSON.stringify(request)
+			});
+			if (response.ok) {
+				let res = reponse.json();
+			} else {
+				throw new Error('Respnse status: ${response.status}');
+			}
+		} catch (error) {
+			console.log(error);
+			throw(error);        // Re-throw the error to be caught by the caller
+		}
+		
+		
 	//	let xhr = new XMLHttpRequest();
 	//	xhr.open('POST', url, false);
 	//	xhr.setRequestHeader('Content-type', 'application/json');
@@ -174,5 +194,4 @@ const DEFAULT_SAPCLIENT = '612';
   }
 
   customElements.define('com-sap-sac-p2r-interface', Main);
-  //this.instance = document.createElement( 'com-sap-sac-p2r-interface');
 })()
