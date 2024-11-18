@@ -81,7 +81,7 @@ const DEFAULT_SAPCLIENT = '612';
 			if (response.ok) {
 				this._csrfToken = response.headers.get("x-csrf-token");
 			} else {
-				throw new Error('Respnse status: ${response.status}');
+				throw new Error(`Fehler beim Abruf des CSRRF Token.\nHTTP Status Code: ${response.status}`);
 			}
 		} catch (error) {
 			console.log(error);
