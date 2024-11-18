@@ -77,7 +77,6 @@ const DEFAULT_SAPCLIENT = '612';
 				},
 				credentials: 'include'
 			});
-			let res = await response.json();
 			if (response.ok) {
 				this._csrfToken = response.headers.get("x-csrf-token");
 			} else {
@@ -144,6 +143,7 @@ const DEFAULT_SAPCLIENT = '612';
 				credentials: 'include',
 				body: JSON.stringify(request)
 			});
+			let res = await response.json();
 			result.status = response.status;
 			result.url = response.url;
 
