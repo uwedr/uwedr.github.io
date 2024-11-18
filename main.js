@@ -119,7 +119,7 @@ const DEFAULT_SAPCLIENT = '612';
 			} catch(error) {
 				console.log('Fehler in Methode createProjectWithWBS.');
 				result.result = 'Exception';
-				result.messages = [ 'CSRF-Token konnte nicht ermittelt werden.' ];
+				result.messages = [ error.stack ];
 				console.log(result.message);
 				return result;
 			}
