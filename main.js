@@ -144,7 +144,6 @@ const DEFAULT_SAPCLIENT = '612';
 				credentials: 'include',
 				body: JSON.stringify(request)
 			});
-			let res = await response.json();
 			result.status = response.status;
 			result.url = response.url;
 
