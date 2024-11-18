@@ -80,7 +80,7 @@ const DEFAULT_SAPCLIENT = '612';
 			if (response.ok) {
 				this._csrfToken = response.headers.get("x-csrf-token");
 			} else {
-				throw new Error(`Fehler beim Abruf des CSRRF Token.\nHTTP Status Code: ${response.status}`);
+				throw new Error(`Fehler beim Abruf des CSRF Token.\nHTTP Status Code: ${response.status}`);
 			}
 		} catch (error) {
 			console.log(error);
@@ -118,9 +118,9 @@ const DEFAULT_SAPCLIENT = '612';
 				await this.fetchCSRFToken();
 			} catch(error) {
 				console.log('Fehler in Methode createProjectWithWBS.');
+				console.log(error.stack);
 				result.result = 'Exception';
 				result.messages = [ error.stack ];
-				console.log(result.message);
 				return result;
 			}
 		}
@@ -143,27 +143,35 @@ const DEFAULT_SAPCLIENT = '612';
 				credentials: 'include',
 				body: JSON.stringify(request)
 			});
-			let res = await response.json();
 			result.status = response.status;
 			result.url = response.url;
 
 			if (response.ok) {
 				debugger;
-				result.status = 'Ok';
+				let res = await response.json();
+				result.result = 'Ok';
 			} else {
 				debugger;
 				result.result = 'Error'
-				result.error = res.error;
-				result.messages = res.error.details.map(message => message);
-				//throw new Error('Respnse status: ${response.status}');
-				//test.result = 'Error';
-				//test.messages = await res.error.details.map(message => message.message);
+				switch (result.status) {
+					case '400':     // Bad Request
+						let res = await response.json();
+						result.messages = (await res.error.message === "") ? [] : [res.error.message];
+						result.messages.concat(await res.error.details.map(x => x.message));
+						break;
+					case '401':     // Unauthorized
+						break;
+					default:
+				}
+
 				
 			}
 		} catch (error) {
-			debugger;
-			console.log(error);
-			result.status = 'Exception';
+			console.log('Fehler in Methode createProjectWithWBS.');
+			console.log(error.stack);
+			result.result = 'Exception';
+			result.messages = [ error.stack ];
+			return result;
 		}
 		//return result;
 		return test;
