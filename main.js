@@ -91,6 +91,7 @@ const DEFAULT_SAPCLIENT = '612';
 	
 	async createProjectWithWBS (request, items) {
 		debugger;
+		const result = new Object();
 		
 		// prepare data -> convert strings into numerical values
 		for (var i=0; i<items.length; i++) {
@@ -117,16 +118,15 @@ const DEFAULT_SAPCLIENT = '612';
 				await this.fetchCSRFToken();
 			} catch(error) {
 				console.log('Fehler in Methode createProjectWithWBS.');
-				console.log('CSRF-Token konnte nicht ermittelt werden.');
-				throw(error); // Re-throw the error to be caught by the caller   // TODO: SAC kann den Fehler ja nicht abfangen -> irgendetwas anders machen
+				result.result = 'Exception';
+				result.message = 'CSRF-Token konnte nicht ermittelt werden.';
+				console.log(result.message);
+				return result;
 			}
 		}
 
 		// send POST request
 		debugger;
-		const result = new Object();
-		//const test = new P2RInterfaceResult();
-		const test = new Object();
 		try {
 			const url = `${this._server}/${this._service}/${this._entitySet}?sap-client=${this._sapClient}`;
 			const response = await fetch(url, {
@@ -156,8 +156,8 @@ const DEFAULT_SAPCLIENT = '612';
 				result.error = res.error;
 				result.messages = res.error.details.map(message => message);
 				//throw new Error('Respnse status: ${response.status}');
-				test.result = 'Error';
-				test.messages = await res.error.details.map(message => message.message);
+				//test.result = 'Error';
+				//test.messages = await res.error.details.map(message => message.message);
 				
 			}
 		} catch (error) {
