@@ -157,9 +157,9 @@ const ACCESS_CONTROL_ALLOW_ORIGIN = 'https://gesundheitskasse-q.eu20.analytics.c
 				result.result = 'Ok';
 				result.project = project;
 
-				var test1 = P2RProjectCreated(result);
-				var test2 = (test1 instanceof P2RProjectCreated);
-				var test3 = (test1 instanceof P2RInterfaceResult);
+				//var test1 = P2RProjectCreated(result);
+				//var test2 = (test1 instanceof P2RProjectCreated);
+				//var test3 = (test1 instanceof P2RInterfaceResult);
 			} else {
 				debugger;
 				result.result = 'Error'
