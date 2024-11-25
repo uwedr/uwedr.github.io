@@ -148,8 +148,13 @@ const DEFAULT_SAPCLIENT = '612';
 
 			if (response.ok) {
 				debugger;
-				let res = await response.json();
+				let project = await response.json();
+				if (project.hasOwnProperty('_bp_item')) {
+					project.items = project._bp_item;
+					delete project._bp_item;				
+				};
 				result.result = 'Ok';
+				result.project = project;
 			} else {
 				debugger;
 				result.result = 'Error'
