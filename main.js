@@ -2,6 +2,7 @@ const DEFAULT_SERVER    = 'https://f1dappl0.test.sozvers.at:44320';
 const DEFAULT_SERVICE   = 'sap/opu/odata4/sap/zapi_bc_sac_bp_request_o4/srvd_a2x/sap/zbc_sac_bp_request/0001'; 
 const DEFAULT_ENTITYSET = 'BPRequest';
 const DEFAULT_SAPCLIENT = '612';
+const ACCESS_CONTROL_ALLOW_ORIGIN = 'https://gesundheitskasse-q.eu20.analytics.cloud.sap/';
 
 
 (function () {
@@ -70,7 +71,7 @@ const DEFAULT_SAPCLIENT = '612';
 				headers: {
 					'X-CSRF-Token'                    : 'Fetch',
 					'Access-Control-Allow-Methods'    : 'GET',
-					'Access-Control-Allow-Origin'     : 'https://gesundheitskasse-q.eu20.analytics.cloud.sap/',
+					'Access-Control-Allow-Origin'     : ACCESS_CONTROL_ALLOW_ORIGIN,
 					'Access-Control-Allow-Credentials': true,
 					'Access-Control-Expose-Headers'   : 'X-Csrf-Token,x-csrf-token',
 					'X-Requested-With'                : 'XMLHttpRequest'
@@ -136,7 +137,7 @@ const DEFAULT_SAPCLIENT = '612';
 					'Cache-Control'                    : 'no-cache',
 					'Access-Control-Allow-Credentials' : true,
 					'Access-Control-Allow-Methods'     : 'POST',
-					'Access-Control-Allow-Origin'      : 'https://gesundheitskasse-q.eu20.analytics.cloud.sap/',
+					'Access-Control-Allow-Origin'      : ACCESS_CONTROL_ALLOW_ORIGIN,
 					"X-Referrer-Hash"                  : window.location.hash,
 					'X-CSRF-Token'                     : this._csrfToken
 				},
@@ -178,8 +179,7 @@ const DEFAULT_SAPCLIENT = '612';
 			result.messages = [ error.stack ];
 			return result;
 		}
-		//return result;
-		return test;
+		return result;
     }
   }
 
