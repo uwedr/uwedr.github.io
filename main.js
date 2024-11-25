@@ -63,7 +63,6 @@ const ACCESS_CONTROL_ALLOW_ORIGIN = 'https://gesundheitskasse-q.eu20.analytics.c
 	}
 	
 	async fetchCSRFToken () {
-	  debugger;
 		const url = `${this._server}/${this._service}/?sap-client=${this._sapClient}`;
 		try {
 			const response = await fetch(url, {
@@ -91,7 +90,6 @@ const ACCESS_CONTROL_ALLOW_ORIGIN = 'https://gesundheitskasse-q.eu20.analytics.c
 	
 	
 	async createProjectWithWBS (request, items) {
-		debugger;
 		const result = new Object();
 		
 		// prepare data -> convert strings into numerical values
@@ -127,7 +125,6 @@ const ACCESS_CONTROL_ALLOW_ORIGIN = 'https://gesundheitskasse-q.eu20.analytics.c
 		}
 
 		// send POST request
-		debugger;
 		try {
 			const url = `${this._server}/${this._service}/${this._entitySet}?sap-client=${this._sapClient}`;
 			const response = await fetch(url, {
@@ -148,7 +145,6 @@ const ACCESS_CONTROL_ALLOW_ORIGIN = 'https://gesundheitskasse-q.eu20.analytics.c
 			result.url = response.url;
 
 			if (response.ok) {
-				debugger;
 				let project = await response.json();
 				if (project.hasOwnProperty('_bp_item')) {
 					project.items = project._bp_item;
@@ -157,7 +153,6 @@ const ACCESS_CONTROL_ALLOW_ORIGIN = 'https://gesundheitskasse-q.eu20.analytics.c
 				result.type = 'P2RCreateProjectResultOk';
 				result.project = project;
 			} else {
-				debugger;
 				result.type = 'P2RCreateProjectResultError'
 				switch (result.status) {
 					case 400:     // Bad Request
@@ -166,7 +161,7 @@ const ACCESS_CONTROL_ALLOW_ORIGIN = 'https://gesundheitskasse-q.eu20.analytics.c
 						result.messages.concat(await res.error.details.map(x => x.message));
 						break;
 					case 401:     // Unauthorized
-					    // TODO: Fehlermeldung erzeugen
+					    result.messages = ['Berechtigungsfehler bei der Projektanlage']
 						break;
 					default:
 				}
