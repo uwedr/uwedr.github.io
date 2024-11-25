@@ -120,7 +120,7 @@ const ACCESS_CONTROL_ALLOW_ORIGIN = 'https://gesundheitskasse-q.eu20.analytics.c
 			} catch(error) {
 				console.log('Fehler in Methode createProjectWithWBS.');
 				console.log(error.stack);
-				result.result = 'Exception';
+				result.type = 'P2RCreateProjectException';
 				result.messages = [ error.stack ];
 				return result;
 			}
@@ -154,15 +154,11 @@ const ACCESS_CONTROL_ALLOW_ORIGIN = 'https://gesundheitskasse-q.eu20.analytics.c
 					project.items = project._bp_item;
 					delete project._bp_item;				
 				};
-				result.result = 'Ok';
+				result.type = 'P2RCreateProjectOk';
 				result.project = project;
-
-				//var test1 = P2RProjectCreated(result);
-				//var test2 = (test1 instanceof P2RProjectCreated);
-				//var test3 = (test1 instanceof P2RInterfaceResult);
 			} else {
 				debugger;
-				result.result = 'Error'
+				result.type = 'P2RCreateProjectError'
 				switch (result.status) {
 					case '400':     // Bad Request
 						let res = await response.json();
@@ -179,7 +175,7 @@ const ACCESS_CONTROL_ALLOW_ORIGIN = 'https://gesundheitskasse-q.eu20.analytics.c
 		} catch (error) {
 			console.log('Fehler in Methode createProjectWithWBS.');
 			console.log(error.stack);
-			result.result = 'Exception';
+			result.type = 'P2RCreateProjectException';
 			result.messages = [ error.stack ];
 			return result;
 		}
