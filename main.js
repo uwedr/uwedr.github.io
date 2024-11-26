@@ -126,6 +126,9 @@ const ACCESS_CONTROL_ALLOW_ORIGIN = 'https://gesundheitskasse-q.eu20.analytics.c
 
 		// send POST request
 		try {
+			debugger;
+			var test = JSON.stringify(request);
+
 			const url = `${this._server}/${this._service}/${this._entitySet}?sap-client=${this._sapClient}`;
 			const response = await fetch(url, {
 				method: 'POST',
