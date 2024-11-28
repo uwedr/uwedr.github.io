@@ -161,7 +161,9 @@ const ACCESS_CONTROL_ALLOW_ORIGIN = 'https://gesundheitskasse-q.eu20.analytics.c
 					case 400:     // Bad Request
 						let res = await response.json();
 						result.messages = (await res.error.message === "") ? [] : [res.error.message];
-						result.messages.concat(await res.error.details.map(x => x.message));
+						if (res.error.hasOwnProperty('details')) {
+							result.messages.concat(await res.error.details.map(x => x.message));				
+						};
 						break;
 					case 401:     // Unauthorized
 					    result.messages = ['Berechtigungsfehler bei der Projektanlage']
