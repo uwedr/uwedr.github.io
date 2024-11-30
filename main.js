@@ -170,7 +170,7 @@ const ACCESS_CONTROL_ALLOW_ORIGIN = 'https://gesundheitskasse-q.eu20.analytics.c
 				credentials: 'include'
 			});
 			result.status = response.status;
-			result.url = res.url;
+			result.url = response.url;
 			let res = await response.json();
 			result.test = '';
 		} catch (error) {
