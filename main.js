@@ -92,38 +92,6 @@ const ACCESS_CONTROL_ALLOW_ORIGIN = 'https://gesundheitskasse-q.eu20.analytics.c
 	async createProjectWithWBS (request, items) {
 		const result = new Object();
 		
-		// prepare data -> convert strings into numerical values
-		for (var i=0; i<items.length; i++) {
-			var item = items[i];
-			
-			if (item.hasOwnProperty('zzgkosten')) {
-				item.zzgkosten = Number(item.zzgkosten);				
-			};
-			if (item.hasOwnProperty('zzkostservice')) {
-				item.zzkostservice = Number(item.zzkostservice);
-			};
-			if (item.hasOwnProperty('zzkmiete')) {
-				item.zzkmiete = Number(item.zzkmiete);
-			};
-			if (item.hasOwnProperty('zzkverbrauch')) {
-				item.zzkverbrauch  = Number(item.zzkverbrauch);
-			};
-		};
-		request._bp_item = items;
-
-		// check CSRF-Token
-		if (this._csrfToken === '') {
-			try {
-				await this.fetchCSRFToken();
-			} catch(error) {
-				console.log('Fehler in Methode createProjectWithWBS.');
-				console.log(error.stack);
-				result.type = 'P2RCreateProjectResultException';
-				result.messages = [ error.stack ];
-				return result;
-			}
-		}
-
 		// send POST request
 		try {
 			debugger;
@@ -181,6 +149,29 @@ const ACCESS_CONTROL_ALLOW_ORIGIN = 'https://gesundheitskasse-q.eu20.analytics.c
 			return result;
 		}
 		return result;
+    }
+
+	async exportDataToS4(jahr, version, antrag) {
+		const selection = `JAHR='${}',SAC_VERSION='${}',SAC_ANTRAG=='${}'`; 
+		const url = `${this._server}/${this._service}/${this._entitySet}/SAP__self.import.importPLanDataAntrag(${selction})?sap-client=${this._sapClient}`;
+		try {
+			const response = await fetch(url, {
+				method: 'GET',
+				headers: {
+					'X-CSRF-Token'                    : 'Fetch',
+					'Access-Control-Allow-Methods'    : 'GET',
+					'Access-Control-Allow-Origin'     : ACCESS_CONTROL_ALLOW_ORIGIN,
+					'Access-Control-Allow-Credentials': true,
+					'Access-Control-Expose-Headers'   : 'X-Csrf-Token,x-csrf-token',
+					'X-Requested-With'                : 'XMLHttpRequest'
+				},
+				credentials: 'include'
+			});
+			return response;
+		} catch (error) {
+			console.log(error);
+			throw(error);        // Re-throw the error to be caught by the caller
+		}
     }
   }
 
