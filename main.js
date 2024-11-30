@@ -152,6 +152,7 @@ const ACCESS_CONTROL_ALLOW_ORIGIN = 'https://gesundheitskasse-q.eu20.analytics.c
     }
 
 	async exportDataToS4(jahr, version, antrag) {
+		const result = new Object();
 		debugger;
 		const selection = `JAHR='${jahr}',SAC_VERSION='${version}',SAC_ANTRAG='${antrag}'`; 
 		const url = `${this._server}/${this._service}/${this._entitySet}/SAP__self.importPlanDataAntrag(${selection})?sap-client=${this._sapClient}`;
@@ -168,11 +169,15 @@ const ACCESS_CONTROL_ALLOW_ORIGIN = 'https://gesundheitskasse-q.eu20.analytics.c
 				},
 				credentials: 'include'
 			});
-			return response;
+			result.status = response.status;
+			result.url = res.url;
+			let res = await response.json();
+			result.test = '';
 		} catch (error) {
 			console.log(error);
-			throw(error);        // Re-throw the error to be caught by the caller
+			result.status = 'Exception'			
 		}
+		return result
     }
   }
 
