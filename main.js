@@ -184,10 +184,11 @@ const ACCESS_CONTROL_ALLOW_ORIGIN = 'https://gesundheitskasse-q.eu20.analytics.c
 
 	async exportDataToS4(jahr, version, typ, wert) {
 		const result = new Object();
+		let selection = ``;
 		debugger;
 		switch (typ) {
 			case 'Antrag':
-				const selection = `JAHR='${jahr}',SAC_VERSION='${version}',SAC_ANTRAG='${wert}',S4_PROJEKT=''`; 
+				selection = `JAHR='${jahr}',SAC_VERSION='${version}',SAC_ANTRAG='${wert}',S4_PROJEKT=''`; 
     		break;
   			case 'Projekt':
 				selection = `JAHR='${jahr}',SAC_VERSION='${version}',SAC_ANTRAG='',S4_PROJEKT='${wert}'`; 
