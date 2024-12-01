@@ -197,7 +197,7 @@ const ACCESS_CONTROL_ALLOW_ORIGIN = 'https://gesundheitskasse-q.eu20.analytics.c
 				return result;
 		}
 		const selection = `JAHR='${jahr}',SAC_VERSION='${version}',SAC_ANTRAG='${antrag},'`; 
-		const url = `${this._server}/${this._service}/${this._entitySet}/SAP__self.importPlanData(${selection})?sap-client=${this._sapClient}`;
+		const url = `${this._server}/${this._service}/${this._entitySet}/SAP__self.importData(${selection})?sap-client=${this._sapClient}`;
 		try {
 			const response = await fetch(url, {
 				method: 'GET',
