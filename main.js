@@ -182,11 +182,22 @@ const ACCESS_CONTROL_ALLOW_ORIGIN = 'https://gesundheitskasse-q.eu20.analytics.c
 		return result;
     }
 
-	async exportDataToS4(jahr, version, antrag) {
+	async exportDataToS4(jahr, version, typ, wert) {
 		const result = new Object();
 		debugger;
-		const selection = `JAHR='${jahr}',SAC_VERSION='${version}',SAC_ANTRAG='${antrag}'`; 
-		const url = `${this._server}/${this._service}/${this._entitySet}/SAP__self.importPlanDataAntrag(${selection})?sap-client=${this._sapClient}`;
+		switch (typ) {
+			case 'Antrag':
+				const selection = `JAHR='${jahr}',SAC_VERSION='${version}',SAC_ANTRAG='${wert}',S4_PROJEKT=''`; 
+    		break;
+  			case 'Projekt':
+				selection = `JAHR='${jahr}',SAC_VERSION='${version}',SAC_ANTRAG='',S4_PROJEKT='${wert}'`; 
+    			break;
+  			default:
+				// TODO: Fehlermeldung und Abbruch
+				return result;
+		}
+		const selection = `JAHR='${jahr}',SAC_VERSION='${version}',SAC_ANTRAG='${antrag},'`; 
+		const url = `${this._server}/${this._service}/${this._entitySet}/SAP__self.importPlanData(${selection})?sap-client=${this._sapClient}`;
 		try {
 			const response = await fetch(url, {
 				method: 'GET',
