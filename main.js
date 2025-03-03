@@ -214,11 +214,30 @@ const ACCESS_CONTROL_ALLOW_ORIGIN = 'https://gesundheitskasse-q.eu20.analytics.c
 			});
 			result.status = response.status;
 			result.url = response.url;
-			let res = await response.json();
-			result.message = res.hasOwnProperty('message') ? res.message : '';
+            
+			switch (result.status) {
+				case 200:
+					result.type = 'P2RInterfaceResultOk';
+					let res = await response.json();
+					result.messages = (await res.message === "") ? [] : [res.message];
+					break;
+				case 400:
+					result.type = 'P2RInterfaceResultError';
+					res = await response.json();
+					result.messages = (await res.error.message === "") ? [] : [res.error.message];
+					if (res.error.hasOwnProperty('details')) {
+						result.messages.concat(await res.error.details.map(x => x.message));				
+					};
+					break;
+				default:
+					result.type = 'P2RInterfaceResultError';
+					result.messages = [`Unbekannter Fehler bei Datenexport. Status ${result.status}`];
+			}
 		} catch (error) {
-			console.log(error);
-			result.status = 'Exception'			
+			console.log('Fehler in Methode exportDataToS4.');
+			console.log(error.stack);
+			result.type = 'P2RInterfaceResultException'
+			result.messages = [ error.stack ];	
 		}
 		return result
     }
