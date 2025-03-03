@@ -229,6 +229,10 @@ const ACCESS_CONTROL_ALLOW_ORIGIN = 'https://gesundheitskasse-q.eu20.analytics.c
 						result.messages.concat(await res.error.details.map(x => x.message));				
 					};
 					break;
+				case 401:
+					result.type = 'P2RInterfaceResultError';
+					result.messages = ['Berechtigungsfehler bei Datenexport (Status 401)'];
+					break;
 				default:
 					result.type = 'P2RInterfaceResultError';
 					result.messages = [`Unbekannter Fehler bei Datenexport. Status ${result.status}`];
