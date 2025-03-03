@@ -215,10 +215,11 @@ const ACCESS_CONTROL_ALLOW_ORIGIN = 'https://gesundheitskasse-q.eu20.analytics.c
 			result.status = response.status;
 			result.url = response.url;
             
+			let res;
 			switch (result.status) {
 				case 200:
 					result.type = 'P2RInterfaceResultOk';
-					let res = await response.json();
+					res = await response.json();
 					result.messages = (await res.message === "") ? [] : [res.message];
 					break;
 				case 400:
