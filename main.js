@@ -162,7 +162,7 @@ const ACCESS_CONTROL_ALLOW_ORIGIN = 'https://gesundheitskasse-q.eu20.analytics.c
 						let res = await response.json();
 						result.messages = (await res.error.message === "") ? [] : [res.error.message];
 						if (res.error.hasOwnProperty('details')) {
-							result.messages.concat(await res.error.details.map(x => x.message));				
+							result.messages = result.messages.concat(await res.error.details.map(x => x.message));				
 						};
 						break;
 					case 401:     // Unauthorized
@@ -184,8 +184,7 @@ const ACCESS_CONTROL_ALLOW_ORIGIN = 'https://gesundheitskasse-q.eu20.analytics.c
     }
 
 	async exportDataToS4(jahr, version, typ, wert) {
-		//test
-		let result = new Object();
+		const result = new Object();
 		let selection;
 		debugger;
 		switch (typ) {
