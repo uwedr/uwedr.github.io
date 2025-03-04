@@ -184,6 +184,7 @@ const ACCESS_CONTROL_ALLOW_ORIGIN = 'https://gesundheitskasse-q.eu20.analytics.c
     }
 
 	async exportDataToS4(jahr, version, typ, wert) {
+		//test
 		let result = new Object();
 		let selection;
 		debugger;
