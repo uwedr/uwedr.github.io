@@ -250,7 +250,7 @@ const ACCESS_CONTROL_ALLOW_ORIGIN = 'https://gesundheitskasse-q.eu20.analytics.c
     }
 
 	convBool( value ) {
-		return  value === true ? "X" : " ";
+		return  value === true ? "X" : "";
 	}
   }
 
