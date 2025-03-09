@@ -191,10 +191,10 @@ const ACCESS_CONTROL_ALLOW_ORIGIN = 'https://gesundheitskasse-q.eu20.analytics.c
 		switch (typ) {
 			case 'Antrag':
 				selection = `JAHR='${jahr}',SAC_VERSION='${version}',SAC_ANTRAG='${wert}',S4_PROJEKT='',JAHR_PLUS_1='${this.convBool(jahr_plus_1)}',`    +
-				            `JAHR_PLUS_2="${this.convBool(jahr_plus_2)}",JAHR_PLUS_3=${this.convBool(jahr_plus_3)},JAHR_0000=${this.convBool(jahr_0000)}`; 
+				            `JAHR_PLUS_2='${this.convBool(jahr_plus_2)}',JAHR_PLUS_3='${this.convBool(jahr_plus_3)}',JAHR_0000='${this.convBool(jahr_0000)}'`; 
     		break;
   			case 'Projekt':
-				selection = `JAHR='${jahr}',SAC_VERSION='${version}',SAC_ANTRAG='',S4_PROJEKT='${wert}',JAHR_PLUS_1=false,JAHR_PLUS_2=false,JAHR_PLUS_3=false,JAHR_0000=false`; 
+				selection = `JAHR='${jahr}',SAC_VERSION='${version}',SAC_ANTRAG='',S4_PROJEKT='${wert}',JAHR_PLUS_1='',JAHR_PLUS_2='',JAHR_PLUS_3='',JAHR_0000=''`; 
     			break;
   			default:
 				// TODO: Fehlermeldung und Abbruch
