@@ -183,6 +183,7 @@ const ACCESS_CONTROL_ALLOW_ORIGIN = 'https://gesundheitskasse-q.eu20.analytics.c
 		return result;
     }
 
+	
 	async exportDataToS4(jahr, version, typ, wert, jahr_plus_1, jahr_plus_2, jahr_plus_3, jahr_0000) {
 		const result = new Object();
 		let selection;
